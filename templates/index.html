@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>TenisBot OLX - Busca</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #fff; color: #222; padding: 20px; max-width: 600px; margin: auto; }
+    input[type="text"] { width: 80%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 15px; font-size: 16px; }
+    .resultado { margin: 15px 0; padding: 10px; border-bottom: 1px solid #ccc; }
+    a { color: #0077cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .preco { font-weight: bold; color: #000; }
+  </style>
+</head>
+<body>
+  <h1>TenisBot OLX - Busca</h1>
+  <form method="post">
+    <input type="text" name="busca" placeholder="Ex: bota timberland 44" value="{{ busca }}">
+    <button type="submit">Buscar</button>
+  </form>
+  <hr>
+  {% if resultados %}
+    <h2>Resultados para "{{ busca }}":</h2>
+    {% for item in resultados %}
+      <div class="resultado">
+        <a href="{{ item.link }}" target="_blank">{{ item.titulo }}</a><br>
+        <span class="preco">{{ item.preco }}</span>
+      </div>
+    {% endfor %}
+  {% elif busca %}
+    <p>Nenhum resultado encontrado.</p>
+  {% endif %}
+</body>
+</html>
